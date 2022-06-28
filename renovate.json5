@@ -1,14 +1,18 @@
 {
-  extends: ['github>netlify/renovate-config:esm'],
+  extends: ['github>netlify/renovate-config:default'],
   ignorePresets: [':prHourlyLimit2'],
   semanticCommits: true,
   dependencyDashboard: true,
   automerge: true,
-  packageRules: [],
-  includePaths: [
-    '{{cookiecutter.project_slug}}/package.json',
+  packageRules: [
+    {
+      // Those cannot be upgraded to a major version until we drop support for Node 8
+      packageNames: [
+        'ava',
+      ],
+      major: {
+        enabled: false,
+      },
+    },
   ],
-  lockFileMaintenance: {
-    enabled: false,
-  },
 }

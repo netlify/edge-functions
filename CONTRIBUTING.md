@@ -22,5 +22,23 @@ promote a positive and inclusive environment.
 First fork and clone the repository. If you're not sure how to do this, please watch
 [these videos](https://egghead.io/courses/how-to-contribute-to-an-open-source-project-on-github).
 
-Most changes should be done to the template itself under `{{cookiecutter.project_slug}}`.
-Post template generation hook is under `hooks/post_gen_project.py`
+Run:
+
+```bash
+npm install
+```
+
+Make sure everything is correctly setup with:
+
+```bash
+npm test
+```
+
+After submitting the pull request, please make sure the Continuous Integration checks are passing.
+
+## Releasing
+
+1. Merge the release PR
+2. Switch to the default branch `git checkout main`
+3. Pull latest changes `git pull`
+4. Publish the package `npm publish`
