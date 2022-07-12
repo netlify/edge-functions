@@ -182,4 +182,3 @@ class FunctionChain {
 }
 
 export { FunctionChain }
-export { Context } from './context'

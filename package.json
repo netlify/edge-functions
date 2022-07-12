@@ -4,9 +4,9 @@
   "version": "1.0.0",
   "description": "JavaScript and TypeScript utilities for Netlify Edge Functions",
   "type": "module",
-  "main": "./dist/index.js",
-  "exports": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "main": "./dist/main.js",
+  "exports": "./dist/main.js",
+  "types": "./dist/main.d.ts",
   "files": [
     "dist/**/*.js",
     "dist/**/*.d.ts"
