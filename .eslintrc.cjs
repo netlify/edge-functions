@@ -8,7 +8,8 @@ module.exports = {
     sourceType: 'module',
   },
   rules: {
-    'import/extensions': [2, 'ignorePackages'],
+    'import/extensions': [2, 'ignorePackages', { "ts": "never", }],
   },
   overrides: [...overrides],
+  "ignorePatterns": ['src/deno_std_lib/*']
 }
