@@ -5,89 +5,86 @@
 // https://github.com/golang/go/blob/master/src/net/http/cookie.go
 // This module is browser compatible.
 
-import { assert } from "../../_util/assert";
-import { toIMF } from "../../datetime/mod";
+import { assert } from '../../_util/assert'
+import { toIMF } from '../../datetime/mod'
 
 export interface Cookie {
   /** Name of the cookie. */
-  name: string;
+  name: string
   /** Value of the cookie. */
-  value: string;
+  value: string
   /** Expiration date of the cookie. */
-  expires?: Date;
+  expires?: Date
   /** Max-Age of the Cookie. Max-Age must be an integer superior or equal to 0. */
-  maxAge?: number;
+  maxAge?: number
   /** Specifies those hosts to which the cookie will be sent. */
-  domain?: string;
+  domain?: string
   /** Indicates a URL path that must exist in the request. */
-  path?: string;
+  path?: string
   /** Indicates if the cookie is made using SSL & HTTPS. */
-  secure?: boolean;
+  secure?: boolean
   /** Indicates that cookie is not accessible via JavaScript. */
-  httpOnly?: boolean;
+  httpOnly?: boolean
   /**
    * Allows servers to assert that a cookie ought not to
    * be sent along with cross-site requests.
    */
-  sameSite?: "Strict" | "Lax" | "None";
+  sameSite?: 'Strict' | 'Lax' | 'None'
   /** Additional key value pairs with the form "key=value" */
-  unparsed?: string[];
+  unparsed?: string[]
 }
 
-const FIELD_CONTENT_REGEXP = /^(?=[\x20-\x7E]*$)[^()@<>,;:\\"\[\]?={}\s]+$/;
+const FIELD_CONTENT_REGEXP = /^(?=[\x20-\x7E]*$)[^()@<>,;:\\"\[\]?={}\s]+$/
 
 function toString(cookie: Cookie): string {
   if (!cookie.name) {
-    return "";
+    return ''
   }
-  const out: string[] = [];
-  validateName(cookie.name);
-  validateValue(cookie.name, cookie.value);
-  out.push(`${cookie.name}=${cookie.value}`);
+  const out: string[] = []
+  validateName(cookie.name)
+  validateValue(cookie.name, cookie.value)
+  out.push(`${cookie.name}=${cookie.value}`)
 
   // Fallback for invalid Set-Cookie
   // ref: https://tools.ietf.org/html/draft-ietf-httpbis-cookie-prefixes-00#section-3.1
-  if (cookie.name.startsWith("__Secure")) {
-    cookie.secure = true;
+  if (cookie.name.startsWith('__Secure')) {
+    cookie.secure = true
   }
-  if (cookie.name.startsWith("__Host")) {
-    cookie.path = "/";
-    cookie.secure = true;
-    delete cookie.domain;
+  if (cookie.name.startsWith('__Host')) {
+    cookie.path = '/'
+    cookie.secure = true
+    delete cookie.domain
   }
 
   if (cookie.secure) {
-    out.push("Secure");
+    out.push('Secure')
   }
   if (cookie.httpOnly) {
-    out.push("HttpOnly");
+    out.push('HttpOnly')
   }
-  if (typeof cookie.maxAge === "number" && Number.isInteger(cookie.maxAge)) {
-    assert(
-      cookie.maxAge >= 0,
-      "Max-Age must be an integer superior or equal to 0",
-    );
-    out.push(`Max-Age=${cookie.maxAge}`);
+  if (typeof cookie.maxAge === 'number' && Number.isInteger(cookie.maxAge)) {
+    assert(cookie.maxAge >= 0, 'Max-Age must be an integer superior or equal to 0')
+    out.push(`Max-Age=${cookie.maxAge}`)
   }
   if (cookie.domain) {
-    validateDomain(cookie.domain);
-    out.push(`Domain=${cookie.domain}`);
+    validateDomain(cookie.domain)
+    out.push(`Domain=${cookie.domain}`)
   }
   if (cookie.sameSite) {
-    out.push(`SameSite=${cookie.sameSite}`);
+    out.push(`SameSite=${cookie.sameSite}`)
   }
   if (cookie.path) {
-    validatePath(cookie.path);
-    out.push(`Path=${cookie.path}`);
+    validatePath(cookie.path)
+    out.push(`Path=${cookie.path}`)
   }
   if (cookie.expires) {
-    const dateString = toIMF(cookie.expires);
-    out.push(`Expires=${dateString}`);
+    const dateString = toIMF(cookie.expires)
+    out.push(`Expires=${dateString}`)
   }
   if (cookie.unparsed) {
-    out.push(cookie.unparsed.join("; "));
+    out.push(cookie.unparsed.join('; '))
   }
-  return out.join("; ");
+  return out.join('; ')
 }
 
 /**
@@ -96,7 +93,7 @@ function toString(cookie: Cookie): string {
  */
 function validateName(name: string | undefined | null): void {
   if (name && !FIELD_CONTENT_REGEXP.test(name)) {
-    throw new TypeError(`Invalid cookie name: "${name}".`);
+    throw new TypeError(`Invalid cookie name: "${name}".`)
   }
 }
 
@@ -107,16 +104,12 @@ function validateName(name: string | undefined | null): void {
  */
 function validatePath(path: string | null): void {
   if (path == null) {
-    return;
+    return
   }
   for (let i = 0; i < path.length; i++) {
-    const c = path.charAt(i);
-    if (
-      c < String.fromCharCode(0x20) || c > String.fromCharCode(0x7E) || c == ";"
-    ) {
-      throw new Error(
-        path + ": Invalid cookie path char '" + c + "'",
-      );
+    const c = path.charAt(i)
+    if (c < String.fromCharCode(0x20) || c > String.fromCharCode(0x7e) || c == ';') {
+      throw new Error(path + ": Invalid cookie path char '" + c + "'")
     }
   }
 }
@@ -127,23 +120,23 @@ function validatePath(path: string | null): void {
  * @param value Cookie value.
  */
 function validateValue(name: string, value: string | null): void {
-  if (value == null || name == null) return;
+  if (value == null || name == null) return
   for (let i = 0; i < value.length; i++) {
-    const c = value.charAt(i);
+    const c = value.charAt(i)
     if (
-      c < String.fromCharCode(0x21) || c == String.fromCharCode(0x22) ||
-      c == String.fromCharCode(0x2c) || c == String.fromCharCode(0x3b) ||
-      c == String.fromCharCode(0x5c) || c == String.fromCharCode(0x7f)
+      c < String.fromCharCode(0x21) ||
+      c == String.fromCharCode(0x22) ||
+      c == String.fromCharCode(0x2c) ||
+      c == String.fromCharCode(0x3b) ||
+      c == String.fromCharCode(0x5c) ||
+      c == String.fromCharCode(0x7f)
     ) {
-      throw new Error(
-        "RFC2616 cookie '" + name + "' cannot have '" + c + "' as value",
-      );
+      throw new Error("RFC2616 cookie '" + name + "' cannot have '" + c + "' as value")
     }
     if (c > String.fromCharCode(0x80)) {
       throw new Error(
-        "RFC2616 cookie '" + name + "' can only have US-ASCII chars as value" +
-          c.charCodeAt(0).toString(16),
-      );
+        "RFC2616 cookie '" + name + "' can only have US-ASCII chars as value" + c.charCodeAt(0).toString(16),
+      )
     }
   }
 }
@@ -155,14 +148,12 @@ function validateValue(name: string, value: string | null): void {
  */
 function validateDomain(domain: string): void {
   if (domain == null) {
-    return;
+    return
   }
-  const char1 = domain.charAt(0);
-  const charN = domain.charAt(domain.length - 1);
-  if (char1 == "-" || charN == "." || charN == "-") {
-    throw new Error(
-      "Invalid first/last char in cookie domain: " + domain,
-    );
+  const char1 = domain.charAt(0)
+  const charN = domain.charAt(domain.length - 1)
+  if (char1 == '-' || charN == '.' || charN == '-') {
+    throw new Error('Invalid first/last char in cookie domain: ' + domain)
   }
 }
 
@@ -172,19 +163,19 @@ function validateDomain(domain: string): void {
  * @return {Object} Object with cookie names as keys
  */
 export function getCookies(headers: Headers): Record<string, string> {
-  const cookie = headers.get("Cookie");
+  const cookie = headers.get('Cookie')
   if (cookie != null) {
-    const out: Record<string, string> = {};
-    const c = cookie.split(";");
+    const out: Record<string, string> = {}
+    const c = cookie.split(';')
     for (const kv of c) {
-      const [cookieKey, ...cookieVal] = kv.split("=");
-      assert(cookieKey != null);
-      const key = cookieKey.trim();
-      out[key] = cookieVal.join("=");
+      const [cookieKey, ...cookieVal] = kv.split('=')
+      assert(cookieKey != null)
+      const key = cookieKey.trim()
+      out[key] = cookieVal.join('=')
     }
-    return out;
+    return out
   }
-  return {};
+  return {}
 }
 
 /**
@@ -196,9 +187,9 @@ export function setCookie(headers: Headers, cookie: Cookie): void {
   // TODO(zekth) : Add proper parsing of Set-Cookie headers
   // Parsing cookie headers to make consistent set-cookie header
   // ref: https://tools.ietf.org/html/rfc6265#section-4.1.1
-  const v = toString(cookie);
+  const v = toString(cookie)
   if (v) {
-    headers.append("Set-Cookie", v);
+    headers.append('Set-Cookie', v)
   }
 }
 
@@ -208,15 +199,11 @@ export function setCookie(headers: Headers, cookie: Cookie): void {
  * @param {string} name Name of cookie
  * @param {Object} attributes Additional cookie attributes
  */
-export function deleteCookie(
-  headers: Headers,
-  name: string,
-  attributes?: { path?: string; domain?: string },
-): void {
+export function deleteCookie(headers: Headers, name: string, attributes?: { path?: string; domain?: string }): void {
   setCookie(headers, {
     name: name,
-    value: "",
+    value: '',
     expires: new Date(0),
     ...attributes,
-  });
+  })
 }

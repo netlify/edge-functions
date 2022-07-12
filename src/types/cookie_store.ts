@@ -1,70 +1,65 @@
-import {
-  Cookie,
-  deleteCookie,
-  getCookies,
-  setCookie,
-} from '../deno_std_lib/http/cookie/cookie';
+import { Cookie, deleteCookie, getCookies, setCookie } from '../deno_std_lib/http/cookie/cookie'
 
 interface DeleteCookieOptions {
-  domain?: string;
-  name: string;
-  path?: string;
+  domain?: string
+  name: string
+  path?: string
 }
 
 interface DeleteCookieOp {
-  options: DeleteCookieOptions;
-  type: "delete";
+  options: DeleteCookieOptions
+  type: 'delete'
 }
 
 interface SetCookieOp {
-  cookie: Cookie;
-  type: "set";
+  cookie: Cookie
+  type: 'set'
 }
 
 class CookieStore {
-  ops: (DeleteCookieOp | SetCookieOp)[];
-  request: Request;
+  ops: (DeleteCookieOp | SetCookieOp)[]
+  request: Request
 
   constructor(request: Request) {
-    this.ops = [];
-    this.request = request;
+    this.ops = []
+    this.request = request
   }
 
   apply(response: Response) {
     this.ops.forEach((op) => {
       switch (op.type) {
-        case "delete":
+        case 'delete':
           deleteCookie(response.headers, op.options.name, {
             domain: op.options.domain,
             path: op.options.path,
-          });
+          })
 
-          break;
+          break
 
-        case "set":
-          setCookie(response.headers, op.cookie);
+        case 'set':
+          setCookie(response.headers, op.cookie)
 
-          break;
+          break
         default:
-          break;
+          break
       }
-    });
+    })
   }
 
   delete(input: string | DeleteCookieOptions) {
     const defaultOptions = {
-      path: "/",
-    };
-    const options = typeof input === "string" ? { name: input } : input;
+      path: '/',
+    }
+    const options = typeof input === 'string' ? { name: input } : input
 
     this.ops.push({
       options: { ...defaultOptions, ...options },
-      type: "delete",
-    });
+      type: 'delete',
+    })
   }
 
   get(name: string) {
-    return getCookies(this.request.headers)[name];
+    return getCookies(this.request.headers)[name]
   }
 
   // eslint-disable-next-line no-use-before-define
@@ -73,18 +68,18 @@ class CookieStore {
       delete: this.delete.bind(this),
       get: this.get.bind(this),
       set: this.set.bind(this),
-    };
+    }
   }
 
   set(cookie: Cookie) {
-    this.ops.push({ cookie, type: "set" });
+    this.ops.push({ cookie, type: 'set' })
   }
 }
 
 interface Cookies {
-  delete: CookieStore["delete"];
-  get: CookieStore["get"];
-  set: CookieStore["set"];
+  delete: CookieStore['delete']
+  get: CookieStore['get']
+  set: CookieStore['set']
 }
-export { CookieStore };
-export type { Cookies };
+export { CookieStore }
+export type { Cookies }

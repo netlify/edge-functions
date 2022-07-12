@@ -1,20 +1,20 @@
 export interface Site {
-  id?: string;
-  name?: string;
-  url?: string;
+  id?: string
+  name?: string
+  url?: string
 }
 
 // eslint-disable-next-line func-style
 export function parseSiteHeader(siteHeader: string | null): Site {
   if (!siteHeader) {
-    return {};
+    return {}
   }
 
   try {
-    const siteData: Site = JSON.parse(atob(siteHeader));
+    const siteData: Site = JSON.parse(atob(siteHeader))
 
-    return siteData;
+    return siteData
   } catch {
-    return {};
+    return {}
   }
 }

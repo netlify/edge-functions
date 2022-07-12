@@ -5,14 +5,14 @@
 
 export class DenoStdInternalError extends Error {
   constructor(message: string) {
-    super(message);
-    this.name = "DenoStdInternalError";
+    super(message)
+    this.name = 'DenoStdInternalError'
   }
 }
 
 /** Make an assertion, if not `true`, then throw. */
-export function assert (expr: unknown, msg = ""): asserts expr {
+export function assert(expr: unknown, msg = ''): asserts expr {
   if (!expr) {
-    throw new DenoStdInternalError(msg);
+    throw new DenoStdInternalError(msg)
   }
 }

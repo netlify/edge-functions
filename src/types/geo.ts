@@ -1,25 +1,25 @@
 export interface Geo {
-  city?: string;
+  city?: string
   country?: {
-    code?: string;
-    name?: string;
-  };
+    code?: string
+    name?: string
+  }
   subdivision?: {
-    code?: string;
-    name?: string;
-  };
+    code?: string
+    name?: string
+  }
 }
 
 export const parseGeoHeader = (geoHeader: string | null) => {
   if (geoHeader === null) {
-    return {};
+    return {}
   }
 
   try {
-    const geoData: Geo = JSON.parse(geoHeader);
+    const geoData: Geo = JSON.parse(geoHeader)
 
-    return geoData;
+    return geoData
   } catch {
-    return {};
+    return {}
   }
 }
