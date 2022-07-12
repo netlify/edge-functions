@@ -25,7 +25,6 @@ class EdgeRequest extends Request {
       requestID: this.headers.get(NFHeaders.RequestID),
       ip: this.headers.get(NFHeaders.IP),
     }
-
     ;[NFHeaders.ForwardedHost, NFHeaders.ForwardedProtocol, NFHeaders.Functions, NFHeaders.Passthrough].forEach(
       (header) => {
         this.headers.delete(header)
