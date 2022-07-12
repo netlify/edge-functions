@@ -11,7 +11,7 @@ export class DenoStdInternalError extends Error {
 }
 
 /** Make an assertion, if not `true`, then throw. */
-export const assert = (expr: unknown, msg = ""): asserts expr => {
+export function assert (expr: unknown, msg = ""): asserts expr {
   if (!expr) {
     throw new DenoStdInternalError(msg);
   }

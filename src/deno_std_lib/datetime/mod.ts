@@ -256,4 +256,3 @@
    const months = compareResult * (calendarDifferences - isLastMonthNotFull);
    return months === 0 ? 0 : months;
  }
- Footer
