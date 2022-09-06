@@ -1,7 +1,7 @@
 *~
 *.swp
 npm-debug.log
-node_modules
+node_modules/
 /core
 .eslintcache
 .npmrc
@@ -11,4 +11,3 @@ node_modules
 /build
 .vscode
 /dist
-node_modules
