@@ -25,7 +25,7 @@ jobs:
           echo "$HOME/.local/bin" >> $GITHUB_PATH
       - name: Configuration
         run: |-
-          echo -e "version: 3\nproject:\n   id: git@github.com:${GITHUB_REPOSITORY}.git\npaths:\n > .fossa.yml
+          echo -e "version: 3\nproject:\n   id: git@github.com:${GITHUB_REPOSITORY}.git" > .fossa.yml
           cat .fossa.yml
       - name: Upload dependencies
         run: FOSSA_TELEMETRY_SCOPE=off fossa analyze --debug
