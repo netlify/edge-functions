@@ -4,7 +4,7 @@ on:
     branches:
       - main
       # to remove once releases are fixed
-      - fix/fix-releases
+      - fix/fix-workflows
 jobs:
   release-please:
     runs-on: ubuntu-latest
