@@ -5,8 +5,6 @@ on:
     branches:
       - main
       - chore/fossa-workflow
-      # to remove once releases are fixed
-      - fix/fix-workflows
 
 defaults:
   run:
