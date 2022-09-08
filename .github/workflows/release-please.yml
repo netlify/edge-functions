@@ -3,8 +3,6 @@ on:
   push:
     branches:
       - main
-      # to remove once releases are fixed
-      - fix/fix-workflows
 jobs:
   release-please:
     runs-on: ubuntu-latest
