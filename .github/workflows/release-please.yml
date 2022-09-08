@@ -3,16 +3,18 @@ on:
   push:
     branches:
       - main
+      # to remove once releases are fixed
+      - fix/fix-releases
 jobs:
   release-please:
     runs-on: ubuntu-latest
     steps:
-      - uses: navikt/github-app-token-generator@a9cd374e271b8aef573b8c16ac46c44fb89b02db
+      - uses: navikt/github-app-token-generator@v1
         id: get-token
         with:
           private-key: ${{ secrets.TOKENS_PRIVATE_KEY }}
           app-id: ${{ secrets.TOKENS_APP_ID }}
-      - uses: GoogleCloudPlatform/release-please-action@v2
+      - uses: google-github-actions/release-please-action@v3
         id: release
         with:
           token: ${{ steps.get-token.outputs.token }}
