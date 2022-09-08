@@ -1,6 +1,5 @@
 {
   "name": "@netlify/edge-functions",
-  "private": true,
   "version": "1.0.0",
   "description": "JavaScript and TypeScript utilities for Netlify Edge Functions",
   "type": "module",
