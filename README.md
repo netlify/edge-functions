@@ -20,9 +20,9 @@ JavaScript and TypeScript utilities for [Netlify Edge Functions](https://docs.ne
 
 ```ts
 // .ts file
-import { Context } from "@netlify/edge-functions";
+import { Context } from "@netlify/edge-functions"
 // or
-import type { Context } from "@netlify/edge-functions";
+import type { Context } from "@netlify/edge-functions"
 ```
 
 ## Contributors
