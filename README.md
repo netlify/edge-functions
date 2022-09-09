@@ -10,7 +10,6 @@ JavaScript and TypeScript utilities for [Netlify Edge Functions](https://docs.ne
 ## Usage
 
 ```json
-// package.json
 {
   "dependencies": {
     "@netlify/edge-functions": "^1.0.1"
