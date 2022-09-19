@@ -36,6 +36,11 @@ npm test
 
 After submitting the pull request, please make sure the Continuous Integration checks are passing.
 
+## Deno Standard Library dependancy
+* Files in the [src/deno_std_lib](./src/deno_std_lib/) folder are adapted as they are from Deno.
+* They'll be manually kept up-to-date until we have [node_deno_shims](https://github.com/denoland/node_deno_shims) add support for the Deno Standard Library's http/cookie module; [@tybys/denostd](https://github.com/toyobayashi/denostd#available-modules) extend support to the http/cookie module or we set up an auto update mechanism that runs when the original Deno Standard Library files are updated.
+* Files they are adapted from are in comments at the top of each file. More here: [src/deno_std_lib/readme.md](./src/deno_std_lib/readme.md).
+
 ## Releasing
 
 1. Merge the release PR
