@@ -11,5 +11,5 @@ module.exports = {
     'import/extensions': [2, 'ignorePackages', { "ts": "never", }],
   },
   overrides: [...overrides],
-  "ignorePatterns": ['src/deno_std_lib/*']
+  "ignorePatterns": ['src/deno_std_lib/*', '*readme.md']
 }
