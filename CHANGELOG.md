@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.2](https://github.com/netlify/edge-functions/compare/v1.0.1...v1.0.2) (2022-09-19)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @deno/shim-deno to ^0.10.0 ([#21](https://github.com/netlify/edge-functions/issues/21)) ([5c11e35](https://github.com/netlify/edge-functions/commit/5c11e35d2dd3cf691ad7a47dc119f1926703c103))
+
 ## [1.0.1](https://github.com/netlify/edge-functions/compare/v1.0.0...v1.0.1) (2022-09-08)
 
 
