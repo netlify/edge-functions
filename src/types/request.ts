@@ -40,7 +40,6 @@ interface OriginRequestOptions {
 }
 
 class OriginRequest extends EdgeRequest {
-  // eslint-disable-next-line complexity
   constructor({ req, stripConditionalHeaders = false, url = new URL(req.url) }: OriginRequestOptions) {
     const passthroughHeader = req[internals].passthrough
     const requestIDHeader = req[internals].requestID
