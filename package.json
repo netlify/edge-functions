@@ -55,7 +55,7 @@
     "@netlify/eslint-config-node": "^7.0.0",
     "ava": "^4.3.3",
     "c8": "^7.11.0",
-    "husky": "^7.0.4",
+    "husky": "^8.0.0",
     "typescript": "^4.5.4"
   },
   "engines": {
