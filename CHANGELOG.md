@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.0.0](https://github.com/netlify/edge-functions/compare/v1.0.2...v2.0.0) (2022-10-19)
+
+
+### ⚠ BREAKING CHANGES
+
+* Drop Node 12 support (#33)
+
+### Bug Fixes
+
+* Drop Node 12 support ([#33](https://github.com/netlify/edge-functions/issues/33)) ([a9b2ad9](https://github.com/netlify/edge-functions/commit/a9b2ad9fc5e2ba757a0bebb665406ef9bcf45160))
+
 ## [1.0.2](https://github.com/netlify/edge-functions/compare/v1.0.1...v1.0.2) (2022-09-19)
 
 
