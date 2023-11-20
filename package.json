@@ -62,6 +62,6 @@
     "node": "^14.16.0 || >=16.0.0"
   },
   "dependencies": {
-    "@deno/shim-deno": "^0.16.0"
+    "@deno/shim-deno": "^0.17.0"
   }
 }
