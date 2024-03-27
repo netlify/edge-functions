@@ -1,1 +1,1 @@
-The `@netlify/edge-functions` package is now published from https://github.com/netlify/edge-functions-bootstrap.
+This repository used to hold the Node.js types for Netlify Edge Functions. It is now archived, and the `@netlify/edge-functions` npm package is published automatically with the edge functions bootstrap code.
